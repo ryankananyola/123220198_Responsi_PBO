@@ -88,10 +88,16 @@ public class ViewDataMahasiswa extends JFrame {
                     Integer id = (int) table.getValueAt(baris, 0);
                     String nama = table.getValueAt(baris, 1).toString();
                     String nim = table.getValueAt(baris, 2).toString();
+                    String email = table.getValueAt(baris, 3).toString();
+                    String password = table.getValueAt(baris, 4).toString();
+                    String angkatan = table.getValueAt(baris, 5).toString();
                     
                     mahasiswaTerpilih.setId(id);
                     mahasiswaTerpilih.setNama(nama);
                     mahasiswaTerpilih.setNim(nim);
+                    mahasiswaTerpilih.setEmail(email);
+                    mahasiswaTerpilih.setPassword(password);
+                    mahasiswaTerpilih.setAngkatan(angkatan);
 
                     dispose();
                     new EditDataMahasiswa(mahasiswaTerpilih);
