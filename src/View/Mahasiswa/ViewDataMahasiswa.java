@@ -66,7 +66,6 @@ public class ViewDataMahasiswa extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-
                 baris = table.getSelectedRow();
             }
         });
@@ -121,7 +120,7 @@ public class ViewDataMahasiswa extends JFrame {
                 
                 if (e.getSource()==tombolKembali){
                     dispose();
-                    new HalamanUtama(username);
+                    //new HalamanUtama(username);
                 } else {
                     JOptionPane.showMessageDialog(null,"");
                 }
