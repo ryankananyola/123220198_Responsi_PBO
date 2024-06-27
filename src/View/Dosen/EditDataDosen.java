@@ -2,19 +2,16 @@ package View.Dosen;
 
 import Controller.ControllerDosen;
 import Model.Dosen.ModelDosen;
-import View.Dosen.ViewDataDosen;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-/**
- *
- * @author USER
- */
 public class EditDataDosen extends JFrame {
+    
     ControllerDosen controller;
     
-    JLabel header = new JLabel("Edit Dosen");
+    JLabel header = new JLabel("EDIT DOSEN");
     JLabel labelInputNama = new JLabel("Nama");
     JLabel labelInputNohp = new JLabel("No Hp");
     JLabel labelInputEmail = new JLabel("Email");
@@ -34,26 +31,34 @@ public class EditDataDosen extends JFrame {
         setLocationRelativeTo(null);
 
         add(header);
+        header.setBounds(180, 25, 440, 30);
+        header.setFont(new Font("Times New Roman", Font.BOLD, 28));
         add(labelInputNama);
+        labelInputNama.setBounds(55, 85, 430, 24);
         add(labelInputNohp);
+        labelInputNohp.setBounds(55, 145, 430, 24);
+        add(labelInputEmail);
+        labelInputEmail.setBounds(55, 205, 430, 24);
+        
         add(inputNama);
+        inputNama.setBounds(55, 110, 430, 30);
         add(inputNohp);
+        inputNohp.setBounds(55, 170, 430, 30);
         add(inputEmail);
-        add(tombolEdit);
-        add(tombolKembali);
-
-        header.setBounds(20, 8, 440, 24);
-        labelInputNama.setBounds(20, 32, 440, 24);
-        inputNama.setBounds(18, 56, 430, 36);
-        labelInputNohp.setBounds(20, 96, 440, 24);
-        inputNohp.setBounds(18, 120, 430, 36);
-        labelInputEmail.setBounds(20, 150, 440, 24);
-        inputEmail.setBounds(18, 200, 430, 36);
-        tombolKembali.setBounds(28, 170, 195, 40);
-        tombolEdit.setBounds(240, 170, 195, 40);
+        inputEmail.setBounds(55, 230, 430, 30);
         
         inputNama.setText(dosen.getNama());
         inputNohp.setText(dosen.getNohp());
+        inputEmail.setText(dosen.getEmail());
+        
+        add(tombolEdit);
+        tombolEdit.setBounds(70, 450, 195, 38);
+        tombolEdit.setForeground(new Color(255,255,255));
+        tombolEdit.setBackground(new Color(50,205,50));
+        add(tombolKembali);
+        tombolKembali.setBounds(280, 450, 195, 38);
+        tombolKembali.setForeground(new Color(255,255,255));
+        tombolKembali.setBackground(new Color(255,0,0));
         
         controller = new ControllerDosen(this);
 
@@ -77,7 +82,11 @@ public class EditDataDosen extends JFrame {
         return inputNama.getText();
     }
     
-    public String getInputNIDN() {
+    public String getInputNohp() {
         return inputNohp.getText();
+    }
+    
+    public String getInputEmail(){
+        return inputEmail.getText();
     }
 }
