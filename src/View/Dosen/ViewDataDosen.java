@@ -3,6 +3,7 @@ package View.Dosen;
 import Controller.ControllerDosen;
 import Model.Dosen.ModelDosen;
 import View.HalamanUtama;
+import View.Session;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.*;
@@ -32,7 +33,11 @@ public class ViewDataDosen extends JFrame{
 
     String namaKolom[] = {"ID", "Nama", "No Hp", "Email"};
 
+    String username;
+    
     public ViewDataDosen() {
+        this.username = Session.getUsername();
+        
         tableModel = new DefaultTableModel(namaKolom, 0);
         table = new JTable(tableModel);
         scrollPane = new JScrollPane(table);
@@ -131,7 +136,7 @@ public class ViewDataDosen extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource()==tombolKembali){
                     dispose();
-                    //new HalamanUtama(username);
+                    new HalamanUtama();
                 } else {
                     JOptionPane.showMessageDialog(null,"");
                 }

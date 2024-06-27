@@ -1,26 +1,19 @@
-
 package View.Mahasiswa;
 
 import Controller.ControllerMahasiswa;
 import Model.Mahasiswa.ModelMahasiswa;
 import View.HalamanUtama;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import View.Session;
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class ViewDataMahasiswa extends JFrame {
 
     Integer baris;
-
     ControllerMahasiswa controller;
-
+    
     JLabel header = new JLabel("Selamat Datang Di Database Mahasiswa!");
     
     JTextField textCari = new JTextField();
@@ -36,8 +29,11 @@ public class ViewDataMahasiswa extends JFrame {
     JScrollPane scrollPane;
 
     String namaKolom[] = {"ID", "Nama", "NIM", "Email", "Password", "Angkatan"};
-
+    
+    String username;
+    
     public ViewDataMahasiswa() {
+        this.username = Session.getUsername();
         
         tableModel = new DefaultTableModel(namaKolom, 0);
         table = new JTable(tableModel);
@@ -154,13 +150,8 @@ public class ViewDataMahasiswa extends JFrame {
         tombolKembali.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                if (e.getSource()==tombolKembali){
-                    dispose();
-                    //new HalamanUtama(username);
-                } else {
-                    JOptionPane.showMessageDialog(null,"");
-                }
+                dispose();
+                new HalamanUtama();
             }
         });
     }

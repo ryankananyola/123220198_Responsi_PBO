@@ -3,20 +3,11 @@ package View;
 
 import View.Dosen.ViewDataDosen;
 import View.Mahasiswa.ViewDataMahasiswa;
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 
-/**
- *
- * @author USER
- */
 public class HalamanUtama extends JFrame implements ActionListener {
     
     JLabel Header = new JLabel();
@@ -26,15 +17,17 @@ public class HalamanUtama extends JFrame implements ActionListener {
     JButton dosen = new JButton("Dosen");
     JButton keluar = new JButton("Logout");
     
-    HalamanUtama(String username){
+    String username;
+    
+    public HalamanUtama(){
+        this.username = Session.getUsername();
+        
         setVisible(true);
         setTitle("Halaman Utama");
         setSize(560, 620);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
         setLayout(null);
         setLocationRelativeTo(null);
-        
         getContentPane().setBackground(new Color(255, 215, 0));
        
         add(Header);
@@ -74,6 +67,7 @@ public class HalamanUtama extends JFrame implements ActionListener {
                new ViewDataDosen();
            } else if(e.getSource()==keluar){
                dispose();
+               Session.setUsername(null); 
                new LoginPage();
            }
             

@@ -75,7 +75,9 @@ public class LoginPage extends JFrame implements ActionListener {
                 throw new Exception("Username Belum diisi");
             }
             
-            new HalamanUtama(username);
+            Session.setUsername(username);
+            
+            new HalamanUtama();
             this.dispose();
             
         } catch (Exception error) {
