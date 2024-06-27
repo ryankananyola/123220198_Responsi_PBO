@@ -1,8 +1,3 @@
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package View;
 
 
@@ -45,20 +40,22 @@ public class HalamanUtama extends JFrame implements ActionListener {
         add(Header);
         Header.setText("Selamat Datang, " + username);
         Header.setFont(new Font("Times New Roman", Font.BOLD, 32));
-        Header.setBounds(50,50,300,35);
+        Header.setBounds(50,50,400,35);
         add(SubHeader);
         SubHeader.setFont(new Font("Times New Roman", Font.BOLD, 18));
         SubHeader.setBounds(50,90,300,35);
         
     // tampilkan button
         add(mahasiswa);
-        mahasiswa.setBounds(50,230,460,35);
+        mahasiswa.setBounds(50,230,440,35);
         
         add(dosen);
-        dosen.setBounds(50,310,460,35);
+        dosen.setBounds(50,310,440,35);
         
         add(keluar);
-        keluar.setBounds(50,390,460,35);
+        keluar.setBounds(50,390,440,35);
+        keluar.setForeground(new Color(255,255,255));
+        keluar.setBackground(new Color(255,0,0));
         
     
         mahasiswa.addActionListener(this);

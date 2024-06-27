@@ -5,8 +5,11 @@ import Controller.ControllerMahasiswa;
 import Model.Mahasiswa.ModelMahasiswa;
 import View.HalamanUtama;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
@@ -19,18 +22,23 @@ public class ViewDataMahasiswa extends JFrame {
     ControllerMahasiswa controller;
 
     JLabel header = new JLabel("Selamat Datang Di Database Mahasiswa!");
+    
+    JTextField textCari = new JTextField();
+    
+    JButton tombolCari = new JButton("Cari");
     JButton tombolTambah = new JButton("Tambah Mahasiswa");
     JButton tombolEdit = new JButton("Edit Mahasiswa");
     JButton tombolHapus = new JButton("Hapus Mahasiswa");
     JButton tombolKembali = new JButton("Kembali Menu Utama");
-
+    
     JTable table;
     DefaultTableModel tableModel;
     JScrollPane scrollPane;
 
-    String namaKolom[] = {"ID", "Nama", "NIM"};
+    String namaKolom[] = {"ID", "Nama", "NIM", "Email", "Password", "Angkatan"};
 
     public ViewDataMahasiswa() {
+        
         tableModel = new DefaultTableModel(namaKolom, 0);
         table = new JTable(tableModel);
         scrollPane = new JScrollPane(table);
@@ -39,26 +47,33 @@ public class ViewDataMahasiswa extends JFrame {
         setTitle("Daftar Mahasiswa");
         setSize(560, 620);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
         setLayout(null);
         setLocationRelativeTo(null);
-        
         getContentPane().setBackground(new Color(255, 215, 0));
         
         add(header);
+        header.setBounds(20, 15, 440, 25);
+        header.setFont(new Font("Times New Roman", Font.BOLD, 24));
+        
+        add(textCari);
+        textCari.setBounds(20,58,400,27);
+        
         add(scrollPane);
+        scrollPane.setBounds(20, 90, 512, 270);
+        
+        add(tombolCari);
+        tombolCari.setBounds(430, 58, 100, 27);
         add(tombolTambah);
+        tombolTambah.setBounds(20, 380, 512, 35);
         add(tombolEdit);
+        tombolEdit.setBounds(20, 419, 512, 35);
         add(tombolHapus);
+        tombolHapus.setBounds(20, 458, 512, 35);
         add(tombolKembali);
-
-        header.setBounds(20, 8, 440, 24);
-        scrollPane.setBounds(20, 36, 512, 320);
-        tombolTambah.setBounds(20, 370, 512, 40);
-        tombolEdit.setBounds(20, 414, 512, 40);
-        tombolHapus.setBounds(20, 458, 512, 40);
-        tombolKembali.setBounds(20, 520,512, 40);
-
+        tombolKembali.setBounds(20, 520,512, 35);
+        tombolKembali.setForeground(new Color(255,255,255));
+        tombolKembali.setBackground(new Color(255,0,0));
+        
         controller = new ControllerMahasiswa(this);
         controller.showAllMahasiswa();
 
@@ -67,6 +82,22 @@ public class ViewDataMahasiswa extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 baris = table.getSelectedRow();
+            }
+        });
+        
+        tombolCari.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String keyword = textCari.getText();
+                controller.cariMahasiswa(keyword);
+            }
+        });
+        
+        textCari.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String keyword = textCari.getText();
+                controller.cariMahasiswa(keyword);
             }
         });
 

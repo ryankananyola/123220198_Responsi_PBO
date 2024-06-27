@@ -15,7 +15,7 @@ public class LoginPage extends JFrame implements ActionListener {
     JLabel labelPassword = new JLabel("Password");
     
     JTextField inputUsername = new JTextField();
-    JTextField inputPassword = new JTextField();
+    JPasswordField inputPassword = new JPasswordField();
     
     JButton tombolLogin = new JButton("Login");
     
@@ -52,7 +52,7 @@ public class LoginPage extends JFrame implements ActionListener {
         
         add(inputPassword);
         inputPassword.setBounds(50,280,435,35);
-        //passWord.setEchoChar('*');
+   
         
          // tampilkan login
         add(tombolLogin);
@@ -65,10 +65,11 @@ public class LoginPage extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
        try {
             String username = inputUsername.getText();
+            String password = new String(inputPassword.getPassword());
             
-            if(username.equals("")&& inputPassword.equals("")){
+            if(username.equals("")&& password.equals("")){
                 throw new Exception("Username dan Password Belum diisi");
-            } else if(inputPassword.equals("")){
+            } else if(password.equals("")){
                 throw new Exception("Password Belum diisi");
             } else if (username.equals("")  ){
                 throw new Exception("Username Belum diisi");
