@@ -7,7 +7,7 @@ public class ModelTabelMahasiswa extends AbstractTableModel {
 
     List<ModelMahasiswa> daftarMahasiswa;
 
-    String kolom[] = {"ID", "Nama", "NIM", "EMAIL", "PASSWORD", "ANGKATAN"};
+    String kolom[] = {"ID", "Nama", "NIM", "Email", "Password", "Angkatan"};
 
     public ModelTabelMahasiswa(List<ModelMahasiswa> daftarMahasiswa) {
         this.daftarMahasiswa = daftarMahasiswa;
@@ -27,19 +27,20 @@ public class ModelTabelMahasiswa extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+        ModelMahasiswa mahasiswa = daftarMahasiswa.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return daftarMahasiswa.get(rowIndex).getId();
+                return mahasiswa.getId();
             case 1:
-                return daftarMahasiswa.get(rowIndex).getNama();
+                return mahasiswa.getNama();
             case 2:
-                return daftarMahasiswa.get(rowIndex).getNim();
+                return mahasiswa.getNim();
             case 3:
-                return daftarMahasiswa.get(rowIndex).getEmail();
+                return mahasiswa.getEmail();
             case 4:
-                return daftarMahasiswa.get(rowIndex).getPassword();
+                return mahasiswa.getPassword();
             case 5:
-                return daftarMahasiswa.get(rowIndex).getAngkatan();
+                return mahasiswa.getAngkatan();
             default:
                 return null;
         }
@@ -48,5 +49,10 @@ public class ModelTabelMahasiswa extends AbstractTableModel {
     @Override
     public String getColumnName(int columnIndex) {
         return kolom[columnIndex];
+    }
+    
+    public void setData(List<ModelMahasiswa> daftarMahasiswa) {
+        this.daftarMahasiswa = daftarMahasiswa;
+        fireTableDataChanged();
     }
 }

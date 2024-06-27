@@ -2,7 +2,7 @@ package Model.Dosen;
 
 public class ModelDosen {
     private Integer id;
-    private String nama, nohp , email;
+    private String nama, no_hp , email;
 
     public Integer getId() {
         return id;
@@ -21,11 +21,11 @@ public class ModelDosen {
     }
 
     public String getNohp() {
-        return nohp;
+        return no_hp;
     }
 
     public void setNohp(String nohp) {
-        this.nohp = nohp;
+        this.no_hp = nohp;
     }
 
     public String getEmail() {

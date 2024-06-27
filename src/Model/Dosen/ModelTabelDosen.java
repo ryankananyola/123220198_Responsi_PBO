@@ -43,4 +43,9 @@ public class ModelTabelDosen extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         return kolom[columnIndex];
     }
+    
+    public void setData(List<ModelDosen> daftarDosen) {
+        this.daftarDosen = daftarDosen;
+        fireTableDataChanged();
+    }
 }

@@ -46,13 +46,19 @@ public class ControllerMahasiswa {
             
             String nama = halamanInput.getInputNama();
             String nim = halamanInput.getInputNIM();
+            String email = halamanInput.getInputEmail();
+            String password = halamanInput.getInputPassword();
+            String angkatan = halamanInput.getInputAngkatan();
 
-            if ("".equals(nama) || "".equals(nim)) {
-                throw new Exception("Nama atau NIM tidak boleh kosong!");
+            if ("".equals(nama) || "".equals(nim) || "".equals(email) || "".equals(password)|| "".equals(angkatan)) {
+                throw new Exception("Data tidak boleh ada yang kosong!");
             }
             
             mahasiswaBaru.setNama(nama);
             mahasiswaBaru.setNim(nim);
+            mahasiswaBaru.setEmail(email);
+            mahasiswaBaru.setPassword(password);
+            mahasiswaBaru.setAngkatan(angkatan);
             
             daoMahasiswa.insert(mahasiswaBaru);
             
@@ -77,7 +83,7 @@ public class ControllerMahasiswa {
             String angkatan = halamanEdit.getInputAngkatan();
 
             if ("".equals(nama) || "".equals(nim) || "".equals(email) || "".equals(password) || "".equals(angkatan)) {
-                throw new Exception("Nama atau NIM tidak boleh kosong!");
+                throw new Exception("Data tidak boleh ada yang kosong!");
             }
             
             mahasiswaYangMauDiedit.setId(id);
@@ -110,19 +116,15 @@ public class ControllerMahasiswa {
         );
 
         if (input == 0) {
-            
             daoMahasiswa.delete(id);
-            
             JOptionPane.showMessageDialog(null, "Berhasil menghapus data.");
-
             showAllMahasiswa();
         }
     }
     
-//    public void searchMahasiswa(String keyword) {
-//    // Panggil metode pencarian dari model
-//    List<ModelMahasiswa> hasilPencarian = ModelMahasiswa.searchMahasiswa(keyword);
-//
-//    // Perbarui tampilan dengan hasil pencarian
-//    ViewDataMahasiswa.updateTable(hasilPencarian);
+    public void cariMahasiswa(String keyword) {
+        List<ModelMahasiswa> data = daoMahasiswa.cariMahasiswa(keyword);
+        ModelTabelMahasiswa tableModel = (ModelTabelMahasiswa) halamanTable.getTableMahasiswa().getModel();
+        tableModel.setData(data);
+    }
 }

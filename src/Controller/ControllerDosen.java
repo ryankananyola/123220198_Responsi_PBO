@@ -45,15 +45,16 @@ public class ControllerDosen {
             ModelDosen dosenBaru = new ModelDosen();
             
             String nama = halamanInput.getInputNama();
-            String nohp = halamanInput.getInputNohp();
+            String no_hp = halamanInput.getInputNoHp();
             String email = halamanInput.getInputEmail();
 
-            if ("".equals(nama) || "".equals(nohp)) {
+            if ("".equals(nama) || "".equals(no_hp) || "".equals(email)) {
                 throw new Exception("Nama atau NIDN tidak boleh kosong!");
             }
             
             dosenBaru.setNama(nama);
-            dosenBaru.setNohp(nohp);
+            dosenBaru.setNohp(no_hp);
+            dosenBaru.setEmail(email);
             
             daoDosen.insert(dosenBaru);
             
@@ -115,5 +116,11 @@ public class ControllerDosen {
 
             showAllDosen();
         }
+    }
+    
+    public void cariDosen(String keyword) {
+        List<ModelDosen> data = daoDosen.cariDosen(keyword);
+        ModelTabelDosen tableModel = (ModelTabelDosen) halamanTable.getTableDosen().getModel();
+        tableModel.setData(data);
     }
 }

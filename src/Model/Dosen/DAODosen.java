@@ -9,7 +9,7 @@ public class DAODosen implements InterfaceDAODosen{
     @Override
     public void insert(ModelDosen dosen) {
         try {
-                String query = "INSERT INTO dosen (nama, nohp, email) VALUES (?, ?);";
+                String query = "INSERT INTO dosen (nama, no_hp, email) VALUES (?,?,?);";
 
                 PreparedStatement statement;
                 statement = Connector.Connect().prepareStatement(query);
@@ -28,14 +28,14 @@ public class DAODosen implements InterfaceDAODosen{
     @Override
     public void update(ModelDosen dosen) {
         try {
-            String query = "UPDATE dosen SET nama=?, nohp=?, email=? WHERE id=?;";
+            String query = "UPDATE dosen SET nama=?, no_hp=?, email=? WHERE id=?;";
             
             PreparedStatement statement;
             statement = Connector.Connect().prepareStatement(query);
             statement.setString(1, dosen.getNama());
             statement.setString(2, dosen.getNohp());
             statement.setString(3, dosen.getEmail());
-            statement.setInt(3, dosen.getId());
+            statement.setInt(4, dosen.getId());
             
             statement.executeUpdate();
             
@@ -81,7 +81,7 @@ public class DAODosen implements InterfaceDAODosen{
                 
                 dsn.setId(resultSet.getInt("id"));
                 dsn.setNama(resultSet.getString("nama"));
-                dsn.setNohp(resultSet.getString("nohp"));
+                dsn.setNohp(resultSet.getString("no_hp"));
                 dsn.setEmail(resultSet.getString("email"));
                 
                 listDosen.add(dsn);
@@ -93,5 +93,30 @@ public class DAODosen implements InterfaceDAODosen{
         }
         return listDosen;
     }
-    
+
+    @Override
+    public List<ModelDosen> cariDosen(String keyword) {
+        List<ModelDosen> result = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM dosen WHERE nama LIKE ? OR no_hp LIKE ? OR email LIKE ?";
+            PreparedStatement statement = Connector.Connect().prepareStatement(query);
+            String searchKeyword = "%" + keyword + "%";
+            for (int i = 1; i <= 3; i++) {
+                statement.setString(i, searchKeyword);
+            }
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                ModelDosen dsn = new ModelDosen();
+                dsn.setId(resultSet.getInt("id"));
+                dsn.setNama(resultSet.getString("nama"));
+                dsn.setNohp(resultSet.getString("no_hp"));
+                dsn.setEmail(resultSet.getString("email"));
+                result.add(dsn);
+            }
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+        }
+        return result;
+    }    
 }

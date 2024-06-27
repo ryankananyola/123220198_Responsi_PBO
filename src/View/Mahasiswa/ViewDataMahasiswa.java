@@ -2,10 +2,12 @@ package View.Mahasiswa;
 
 import Controller.ControllerMahasiswa;
 import Model.Mahasiswa.ModelMahasiswa;
+import Model.Mahasiswa.ModelTabelMahasiswa;
 import View.HalamanUtama;
 import View.Session;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -35,7 +37,7 @@ public class ViewDataMahasiswa extends JFrame {
     public ViewDataMahasiswa() {
         this.username = Session.getUsername();
         
-        tableModel = new DefaultTableModel(namaKolom, 0);
+        ModelTabelMahasiswa tableModel = new ModelTabelMahasiswa(new ArrayList<>());
         table = new JTable(tableModel);
         scrollPane = new JScrollPane(table);
 
@@ -88,7 +90,7 @@ public class ViewDataMahasiswa extends JFrame {
                 controller.cariMahasiswa(keyword);
             }
         });
-        
+
         textCari.addKeyListener(new KeyAdapter(){
             @Override
             public void keyReleased(KeyEvent e) {

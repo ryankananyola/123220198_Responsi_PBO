@@ -14,4 +14,6 @@ public interface InterfaceDAOMahasiswa {
     
     // Method untuk mengambil data mahasiswa
     public List<ModelMahasiswa> getAll();
+    
+    public List<ModelMahasiswa> cariMahasiswa(String keyword);
 }

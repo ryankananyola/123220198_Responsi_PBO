@@ -84,6 +84,22 @@ public class ViewDataDosen extends JFrame{
                 baris = table.getSelectedRow();
             }
         });
+        
+        tombolCari.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String keyword = textCari.getText();
+                controller.cariDosen(keyword);
+            }
+        });
+
+        textCari.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String keyword = textCari.getText();
+                controller.cariDosen(keyword);
+            }
+        });
 
         tombolTambah.addActionListener(new ActionListener() {
             @Override

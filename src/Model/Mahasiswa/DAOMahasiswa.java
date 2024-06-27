@@ -11,7 +11,7 @@ public class DAOMahasiswa implements InterfaceDAOMahasiswa {
     public void insert(ModelMahasiswa mahasiswa) {
         try {
             // Perintah query disimpan ke dalam variabel "query"
-            String query = "INSERT INTO mahasiswa (nama, nim, email, passwword, angkatan) VALUES (?, ?,?,?,?);";
+            String query = "INSERT INTO mahasiswa (nama, nim, email, password, angkatan) VALUES (?, ?,?,?,?);";
             
             PreparedStatement statement;
             statement = Connector.Connect().prepareStatement(query);
@@ -37,7 +37,7 @@ public class DAOMahasiswa implements InterfaceDAOMahasiswa {
     public void update(ModelMahasiswa mahasiswa) {
         try {
             // Perintah query disimpan ke dalam variabel "query"
-            String query = "UPDATE mahasiswa SET nama=?, nim=? WHERE id=?;";
+            String query = "UPDATE mahasiswa SET nama=?, nim=?, email=?, password=?, angkatan=? WHERE id=?;";
             
             PreparedStatement statement;
             statement = Connector.Connect().prepareStatement(query);
@@ -46,7 +46,7 @@ public class DAOMahasiswa implements InterfaceDAOMahasiswa {
             statement.setString(3, mahasiswa.getEmail());
             statement.setString(4, mahasiswa.getPassword());
             statement.setString(5, mahasiswa.getAngkatan());
-            statement.setInt(3, mahasiswa.getId());
+            statement.setInt(6, mahasiswa.getId());
             
             // Menjalankan query untuk menghapus data mahasiswa yang dipilih
             statement.executeUpdate();
@@ -123,13 +123,32 @@ public class DAOMahasiswa implements InterfaceDAOMahasiswa {
         }
         return listMahasiswa;
     }
-    
-//    public void searchMahasiswa(String keyword) {
-//    // Panggil metode pencarian dari model
-//    List<ModelMahasiswa> hasilPencarian = ModelMahasiswa.searchMahasiswa(keyword);
-//
-//    // Perbarui tampilan dengan hasil pencarian
-//    view.updateTable(hasilPencarian);
-//    }
-//    
+
+    @Override
+    public List<ModelMahasiswa> cariMahasiswa(String keyword) {
+        List<ModelMahasiswa> result = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM mahasiswa WHERE nama LIKE ? OR nim LIKE ? OR email LIKE ? OR password LIKE ? OR angkatan LIKE ?";
+            PreparedStatement statement = Connector.Connect().prepareStatement(query);
+            String searchKeyword = "%" + keyword + "%";
+            for (int i = 1; i <= 5; i++) {
+                statement.setString(i, searchKeyword);
+            }
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                ModelMahasiswa mhs = new ModelMahasiswa();
+                mhs.setId(resultSet.getInt("id"));
+                mhs.setNama(resultSet.getString("nama"));
+                mhs.setNim(resultSet.getString("nim"));
+                mhs.setEmail(resultSet.getString("email"));
+                mhs.setPassword(resultSet.getString("password"));
+                mhs.setAngkatan(resultSet.getString("angkatan"));
+                result.add(mhs);
+            }
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+        }
+        return result;
+    }
 }

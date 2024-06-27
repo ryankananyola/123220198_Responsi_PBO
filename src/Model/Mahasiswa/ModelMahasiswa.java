@@ -52,6 +52,4 @@ public class ModelMahasiswa {
     public void setAngkatan(String angkatan) {
         this.angkatan = angkatan;
     }
-    
-    
 }
