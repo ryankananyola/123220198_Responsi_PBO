@@ -1,52 +1,61 @@
 package View.Dosen;
 
 import Controller.ControllerDosen;
-import View.Dosen.ViewDataDosen;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class InputDataDosen extends JFrame {
+    
     ControllerDosen controller;
     
-    JLabel header = new JLabel("Input Dosen");
+    JLabel header = new JLabel("INPUT DOSEN");
     JLabel labelInputNama = new JLabel("Nama");
     JLabel labelInputNohp = new JLabel("No Hp");
     JLabel labelInputEmail = new JLabel("Email");
+    
     JTextField inputNama = new JTextField();
     JTextField inputNohp = new JTextField();
     JTextField inputEmail = new JTextField();
+    
     JButton tombolTambah = new JButton("Tambah Dosen");
     JButton tombolKembali = new JButton("Kembali");
 
     public InputDataDosen() {
-         setVisible(true);
+        
+        setVisible(true);
         setTitle("Input Dosen");
         setSize(560, 610);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
         setLayout(null);
         setLocationRelativeTo(null);
         
         add(header);
+        header.setBounds(175, 25, 440, 30);
+        header.setFont(new Font("Times New Roman", Font.BOLD, 28));
         add(labelInputNama);
+        labelInputNama.setBounds(55, 85, 430, 24);
         add(labelInputNohp);
+        labelInputNohp.setBounds(55, 145, 430, 24);
         add(labelInputEmail);
+        labelInputEmail.setBounds(55, 205, 430, 24);
+        
         add(inputNama);
+        inputNama.setBounds(55, 110, 430, 30);
         add(inputNohp);
+        inputNohp.setBounds(55, 170, 430, 30);
         add(inputEmail);
+        inputEmail.setBounds(55, 230, 430, 30);
+        
         add(tombolTambah);
+        tombolTambah.setBounds(70, 450, 195, 38);
+        tombolTambah.setForeground(new Color(255,255,255));
+        tombolTambah.setBackground(new Color(50,205,50));
         add(tombolKembali);
-
-        header.setBounds(20, 8, 440, 24);
-        labelInputNama.setBounds(20, 32, 440, 24);
-        inputNama.setBounds(18, 56, 430, 36);
-        labelInputNohp.setBounds(20, 96, 440, 24);
-        inputNohp.setBounds(18, 120, 430, 36);
-        labelInputEmail.setBounds(10, 176, 440, 24);
-        inputEmail.setBounds(18, 215, 430, 36);
-        tombolKembali.setBounds(28, 300, 195, 40);
-        tombolTambah.setBounds(240, 300, 195, 40);
+        tombolKembali.setBounds(280, 450, 195, 38);
+        tombolKembali.setForeground(new Color(255,255,255));
+        tombolKembali.setBackground(new Color(255,0,0));
         
         controller = new ControllerDosen(this);
 
@@ -70,13 +79,11 @@ public class InputDataDosen extends JFrame {
         return inputNama.getText();
     }
     
-    public String getInputNIDN() {
+    public String getInputNoHp() {
         return inputNohp.getText();
     }
     
     public String getInputEmail() {
         return inputEmail.getText();
     }
-    
-    
 }
